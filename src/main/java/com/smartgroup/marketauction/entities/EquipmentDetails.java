@@ -26,7 +26,7 @@ public class EquipmentDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Corresponds to the item ID (e.g., 67352)
+    private Long id; 
 
     @Column(name = "category", nullable = false)
     private String category;

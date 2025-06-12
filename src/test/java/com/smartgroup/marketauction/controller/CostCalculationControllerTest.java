@@ -1,9 +1,10 @@
 package com.smartgroup.marketauction.controller;
 
+import com.smartgroup.marketauction.dto.CostCalculationResult;
 import com.smartgroup.marketauction.services.CostCalculationService;
-import com.smartgroup.marketauction.services.CostCalculationResult;
-import com.smartgroup.marketauction.exceptions.ModelIdNotFoundException;
-import com.smartgroup.marketauction.exceptions.ExerciseNotFoundException;
+import com.smartgroup.marketauction.web.errorhandling.ExerciseNotFoundException;
+import com.smartgroup.marketauction.web.errorhandling.ModelIdNotFoundException;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
