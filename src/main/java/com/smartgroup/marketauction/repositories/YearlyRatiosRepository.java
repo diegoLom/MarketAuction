@@ -4,9 +4,9 @@ import com.smartgroup.marketauction.entities.YearlyRatios;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface YearlyRatiosRepository extends JpaRepository<YearlyRatios, Long> {
-    List<YearlyRatios> findByYear(Integer year);
+    Optional<YearlyRatios> findByEquipmentDetailsIdAndYearRatio(Long equipmentId, Integer yearRatio);
 }

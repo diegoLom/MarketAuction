@@ -28,8 +28,8 @@ public class YearlyRatios {
     @JoinColumn(name = "item_id", nullable = false)
     private EquipmentDetails equipmentDetails;
 
-    @Column(name = "year", nullable = false)
-    private Integer year;
+    @Column(name = "year_ratio", nullable = false)
+    private Integer yearRatio;
 
     @Column(name = "market_ratio", nullable = false)
     private Double marketRatio;

@@ -1,5 +1,6 @@
 package com.smartgroup.marketauction.services;
 
+import com.smartgroup.marketauction.dto.CostCalculationResult;
 import com.smartgroup.marketauction.entities.EquipmentDetails;
 import com.smartgroup.marketauction.entities.YearlyRatios;
 import com.smartgroup.marketauction.repositories.EquipmentDetailsRepository;
@@ -12,8 +13,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+
+import com.smartgroup.marketauction.web.errorhandling.ModelIdNotFoundException;
+
 import java.math.BigDecimal;
-import java.util.List;
+
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -48,19 +52,19 @@ class CostCalculationServiceTest {
                 .create();
 
         YearlyRatios yearly = Instancio.of(YearlyRatios.class)
-                .set(Select.field("year"), year)
+                .set(Select.field("yearRatio"), year)
                 .set(Select.field("marketRatio"), 1.2)
                 .set(Select.field("auctionRatio"), 0.8)
                 .create();
 
         when(equipmentDetailsRepository.findById(modelId)).thenReturn(Optional.of(equipment));
-        when(yearlyRatiosRepository.findByYear(year)).thenReturn(List.of(yearly));
+        when(yearlyRatiosRepository.findByEquipmentDetailsIdAndYearRatio(modelId, year)).thenReturn(Optional.of(yearly));
 
         CostCalculationResult result = costCalculationService.calculateCostValues(modelId, year);
 
         assertNotNull(result);
-        assertEquals(1200.00, result.getMarketValue());
-        assertEquals(800.00, result.getAuctionValue());
+        assertEquals(1200.00, result.marketValue());
+        assertEquals(800.00, result.auctionValue());
     }
 
     @Test
@@ -76,13 +80,13 @@ class CostCalculationServiceTest {
                 .create();
 
         when(equipmentDetailsRepository.findById(modelId)).thenReturn(Optional.of(equipment));
-        when(yearlyRatiosRepository.findByYear(year)).thenReturn(List.of());
+        when(yearlyRatiosRepository.findByEquipmentDetailsIdAndYearRatio(modelId, year)).thenReturn(Optional.empty());
 
         CostCalculationResult result = costCalculationService.calculateCostValues(modelId, year);
 
         assertNotNull(result);
-        assertEquals(2100.00, result.getMarketValue());
-        assertEquals(1900.00, result.getAuctionValue());
+        assertEquals(2100.00, result.marketValue());
+        assertEquals(1900.00, result.auctionValue());
     }
 
     @Test
@@ -96,19 +100,5 @@ class CostCalculationServiceTest {
                 costCalculationService.calculateCostValues(modelId, year));
     }
 
-    @Test
-    void testCalculateCostValues_YearNotFound_ThrowsException() {
-        Long modelId = 1L;
-        Integer year = 9999;
-
-        EquipmentDetails equipment = Instancio.of(EquipmentDetails.class)
-                .set(Select.field("id"), modelId)
-                .create();
-
-        when(equipmentDetailsRepository.findById(modelId)).thenReturn(Optional.of(equipment));
-        when(yearlyRatiosRepository.findByYear(year)).thenReturn(null); 
-
-        assertThrows(ExerciseNotFoundException.class, () ->
-                costCalculationService.calculateCostValues(modelId, year));
-    } 
+   
 }
