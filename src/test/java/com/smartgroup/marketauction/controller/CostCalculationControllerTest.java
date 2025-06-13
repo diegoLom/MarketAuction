@@ -19,6 +19,8 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.math.BigDecimal;
+
 @WebMvcTest(CostCalculationController.class)
 class CostCalculationControllerTest {
 
@@ -30,7 +32,7 @@ class CostCalculationControllerTest {
 
         @Test
         void whenValidIdAndYear_thenReturnsCostCalculation() throws Exception {
-                CostCalculationResult result = new CostCalculationResult(1200.0, 800.0);
+                CostCalculationResult result = new CostCalculationResult(new BigDecimal(1200.0), new BigDecimal(800.0));
 
                 Mockito.when(costCalculationService.calculateCostValues(1L, 2022)).thenReturn(result);
 

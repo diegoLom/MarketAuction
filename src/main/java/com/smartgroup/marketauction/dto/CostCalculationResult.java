@@ -1,5 +1,7 @@
 package com.smartgroup.marketauction.dto;
 
-public record CostCalculationResult(double marketValue, double auctionValue) {
+import java.math.BigDecimal;
+
+public record CostCalculationResult(BigDecimal marketValue, BigDecimal auctionValue) {
 
 }

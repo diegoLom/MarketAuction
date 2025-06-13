@@ -21,11 +21,11 @@ class CostCalculationApiIntegrationTest {
     @Test
     void testApiWithGivenParameters() {
         ResponseEntity<CostCalculationResult> response1 = restTemplate.getForEntity(
-                "/cost?id=67352&year=2007", CostCalculationResult.class);
-        logger.info("Result for Year 2007, ID 67352: {}", response1.getBody());
+                "/cost?id=67352&year=2006", CostCalculationResult.class);
+        logger.info("Result for Year 2006, ID 67352: {}", response1.getBody());
 
         ResponseEntity<String> response2 = restTemplate.getForEntity(
-                "/cost?id=87964&year=2011", String.class);
-        logger.info("Result for Year 2011, ID 87964: {}", response2.getBody());
+                "/cost?id=67352&year=2005", String.class);
+        logger.info("Result for Year 2005, ID 67352: {}", response2.getBody());
     }
 }
