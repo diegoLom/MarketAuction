@@ -1,5 +1,6 @@
 package com.smartgroup.marketauction.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +11,8 @@ import com.smartgroup.marketauction.entities.YearlyRatios;
 @Repository
 public interface YearlyRatiosRepository extends JpaRepository<YearlyRatios, Long> {
     Optional<YearlyRatios> findByEquipmentDetailsIdAndYearRatio(Long equipmentId, Integer yearRatio);
+
+    List<YearlyRatios> findByOrderByYearRatioAsc();
+
+    Optional<YearlyRatios> findFirstByOrderByYearRatioAsc();
 }

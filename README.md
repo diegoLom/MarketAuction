@@ -22,7 +22,7 @@ This is a Spring Boot application for calculating equipment costs based on yearl
 
 2. **Build and start the application:**
    ```sh
-   ./mvnw spring-boot:run
+   mvn spring-boot:run
    ```
    The application will start on [http://localhost:8080](http://localhost:8080).
 
@@ -48,12 +48,12 @@ curl "http://localhost:8080/cost?id=67352&year=2007"
 
 1. **Run all tests:**
    ```sh
-   ./mvnw test
+   mvn test
    ```
 
 2. **Run only the integration test:**
    ```sh
-   ./mvnw -Dtest=CostCalculationApiIntegrationTest test
+   mvn -Dtest=CostCalculationApiIntegrationTest test
    ```
 
    The integration test will call the `/cost` endpoint with sample parameters and print the results to the console.
