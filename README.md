@@ -16,7 +16,7 @@ This is a Spring Boot application for calculating equipment costs based on yearl
 
 1. **Clone the repository:**
    ```sh
-   git clone 
+   git clone https://github.com/diegoLom/MarketAuction
    cd marketauction
    ```
 
@@ -60,14 +60,6 @@ curl "http://localhost:8080/cost?id=67352&year=2007"
 
 ---
 
-## How to See Only `System.out` Output in the Console
-
-By default, Maven and most IDEs show both test output and logs.  
-To see only `System.out.println` output from your integration test:
-
-- **In IntelliJ/VS Code:**  
-  Filter the console output by searching for `Result for Year` or your custom print statement.
-
 ## Troubleshooting
 
 - If you see a "table not found" error, ensure you have `spring.jpa.defer-datasource-initialization=true` in your `application.properties`.
@@ -84,4 +76,4 @@ To see only `System.out.println` output from your integration test:
 ---
 
 ## Contact
-For questions or help, contact the project maintainer.
+For questions or help, contact the diegosantana019@gmail.com

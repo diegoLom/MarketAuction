@@ -9,7 +9,7 @@ import com.smartgroup.marketauction.entities.EquipmentDetails;
 import com.smartgroup.marketauction.entities.YearlyRatios;
 import com.smartgroup.marketauction.repositories.EquipmentDetailsRepository;
 import com.smartgroup.marketauction.repositories.YearlyRatiosRepository;
-import com.smartgroup.marketauction.web.errorhandling.ModelIdNotFoundException;
+import com.smartgroup.marketauction.web.errorhandling.exceptions.ModelIdNotFoundException;
 
 @Service
 public class CostCalculationService {
@@ -40,7 +40,6 @@ public class CostCalculationService {
             marketValue = cost.multiply(BigDecimal.valueOf(yearly.getMarketRatio())).doubleValue();
             auctionValue = cost.multiply(BigDecimal.valueOf(yearly.getAuctionRatio())).doubleValue();
         } else {
-            // Use default ratios from EquipmentDetails
             marketValue = cost.multiply(BigDecimal.valueOf(equipment.getDefaultMarketRatio())).doubleValue();
             auctionValue = cost.multiply(BigDecimal.valueOf(equipment.getDefaultAuctionRatio())).doubleValue();
         }
