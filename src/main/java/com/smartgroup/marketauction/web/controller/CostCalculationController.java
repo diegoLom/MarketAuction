@@ -1,4 +1,4 @@
-package com.smartgroup.marketauction.controller;
+package com.smartgroup.marketauction.web.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

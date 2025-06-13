@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.smartgroup.marketauction.dto.ResponseDTO;
+import com.smartgroup.marketauction.web.errorhandling.exceptions.ExerciseNotFoundException;
+import com.smartgroup.marketauction.web.errorhandling.exceptions.ModelIdNotFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

@@ -1,31 +1,30 @@
 package com.smartgroup.marketauction.services;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
+import org.instancio.Instancio;
+import org.instancio.Select;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
+
 import com.smartgroup.marketauction.dto.CostCalculationResult;
 import com.smartgroup.marketauction.entities.EquipmentDetails;
 import com.smartgroup.marketauction.entities.YearlyRatios;
 import com.smartgroup.marketauction.repositories.EquipmentDetailsRepository;
 import com.smartgroup.marketauction.repositories.YearlyRatiosRepository;
-import org.instancio.Instancio;
-import org.instancio.Select;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-
-import com.smartgroup.marketauction.web.errorhandling.ModelIdNotFoundException;
-
-import java.math.BigDecimal;
-
-import java.util.Optional;
-
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
+import com.smartgroup.marketauction.web.errorhandling.exceptions.ModelIdNotFoundException;
 
 class CostCalculationServiceTest {
 
-   @Mock
+    @Mock
     private EquipmentDetailsRepository equipmentDetailsRepository;
 
     @Mock
@@ -58,7 +57,8 @@ class CostCalculationServiceTest {
                 .create();
 
         when(equipmentDetailsRepository.findById(modelId)).thenReturn(Optional.of(equipment));
-        when(yearlyRatiosRepository.findByEquipmentDetailsIdAndYearRatio(modelId, year)).thenReturn(Optional.of(yearly));
+        when(yearlyRatiosRepository.findByEquipmentDetailsIdAndYearRatio(modelId, year))
+                .thenReturn(Optional.of(yearly));
 
         CostCalculationResult result = costCalculationService.calculateCostValues(modelId, year);
 
@@ -96,9 +96,7 @@ class CostCalculationServiceTest {
 
         when(equipmentDetailsRepository.findById(modelId)).thenReturn(Optional.empty());
 
-        assertThrows(ModelIdNotFoundException.class, () ->
-                costCalculationService.calculateCostValues(modelId, year));
+        assertThrows(ModelIdNotFoundException.class, () -> costCalculationService.calculateCostValues(modelId, year));
     }
 
-   
 }

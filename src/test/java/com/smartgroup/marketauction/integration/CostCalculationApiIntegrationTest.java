@@ -1,6 +1,8 @@
 package com.smartgroup.marketauction.integration;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -11,6 +13,8 @@ import com.smartgroup.marketauction.dto.CostCalculationResult;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CostCalculationApiIntegrationTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(CostCalculationApiIntegrationTest.class);
+
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -18,10 +22,10 @@ class CostCalculationApiIntegrationTest {
     void testApiWithGivenParameters() {
         ResponseEntity<CostCalculationResult> response1 = restTemplate.getForEntity(
                 "/cost?id=67352&year=2007", CostCalculationResult.class);
-        System.out.println("Result for Year 2007, ID 67352: " + response1.getBody());
+        logger.info("Result for Year 2007, ID 67352: {}", response1.getBody());
 
         ResponseEntity<String> response2 = restTemplate.getForEntity(
                 "/cost?id=87964&year=2011", String.class);
-        System.out.println("Result for Year 2011, ID 87964: " + response2.getBody());
+        logger.info("Result for Year 2011, ID 87964: {}", response2.getBody());
     }
 }
